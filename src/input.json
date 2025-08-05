@@ -1,0 +1,125 @@
+{
+   "data": [
+    {
+        "id": "1",
+        "name": "cluster1",
+        "image": "image_path_1",
+        "status": "active",
+        "created_at": "2023-10-01T12:00:00Z",
+        "updated_at": "2023-10-01T12:00:00Z",
+        "description": "Production cluster for web applications with high availability setup.",
+        "Ready": "3",
+        "Health": "95",
+        "Nodes": "3",
+        "Pods": "10",
+        "podDetatils": [
+            {
+                "podName": "web-frontend-1",
+                "podStatus": "Running",
+                "podIP": "192.168.1.10"
+           
+                },
+            {
+                "podName": "web-frontend-2",
+                "podStatus": "Running",
+                "podIP": "192.168.1.11"
+           
+                },
+            {
+                "podName": "api-backend-1",
+                "podStatus": "Running",
+                "podIP": "192.168.1.20"
+           
+                }
+       
+            ]
+   
+        },
+    {
+        "id": "2",
+        "name": "cluster2",
+        "image": "image_path_2",
+        "status": "active",
+        "created_at": "2023-09-15T08:30:00Z",
+        "updated_at": "2023-10-02T14:20:00Z",
+        "description": "Development cluster for testing new features and CI/CD pipelines.",
+        "Ready": "2",
+        "Health": "87",
+        "Nodes": "2",
+        "Pods": "8",
+        "podDetatils": [
+            {
+                "podName": "test-app-1",
+                "podStatus": "Running",
+                "podIP": "192.168.2.10"
+           
+                },
+            {
+                "podName": "test-app-2",
+                "podStatus": "Pending",
+                "podIP": "192.168.2.11"
+           
+                }
+       
+            ]
+   
+        },
+    {
+        "id": "3",
+        "name": "cluster3",
+        "image": "image_path_3",
+        "status": "inactive",
+        "created_at": "2023-08-20T16:45:00Z",
+        "updated_at": "2023-09-28T10:15:00Z",
+        "description": "Staging cluster temporarily offline for maintenance and upgrades.",
+        "Ready": "0",
+        "Health": "0",
+        "Nodes": "3",
+        "Pods": "0",
+        "podDetatils": []
+   
+        },
+    {
+        "id": "4",
+        "name": "cluster4",
+        "image": "image_path_4",
+        "status": "active",
+        "created_at": "2023-10-05T09:00:00Z",
+        "updated_at": "2023-10-05T09:00:00Z",
+        "description": "Microservices cluster hosting multiple containerized applications.",
+        "Ready": "5",
+        "Health": "92",
+        "Nodes": "5",
+        "Pods": "25",
+        "podDetatils": [
+            {
+                "podName": "user-service-1",
+                "podStatus": "Running",
+                "podIP": "192.168.4.10"
+           
+                },
+            {
+                "podName": "user-service-2",
+                "podStatus": "Running",
+                "podIP": "192.168.4.11"
+           
+                },
+            {
+                "podName": "payment-service-1",
+                "podStatus": "Running",
+                "podIP": "192.168.4.20"
+           
+                },
+            {
+                "podName": "notification-service-1",
+                "podStatus": "Running",
+                "podIP": "192.168.4.30"
+           
+                }
+       
+            ]
+   
+        }
+  
+    ] 
+}
