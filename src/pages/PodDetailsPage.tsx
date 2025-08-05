@@ -92,9 +92,9 @@ const PodDetailsPage: React.FC = () => {
 
             <div className="pods-section">
                 <div className="pods-section-header">
-                    <h3>Pod Details ({cluster.podDetatils?.length || 0} pods)</h3>
+                    <h3>Pod Details ({cluster?.podDetails?.length || 0} pods)</h3>
                 </div>
-                {cluster.podDetatils && cluster.podDetatils.length > 0 ? (
+                {cluster?.podDetails && cluster?.podDetails.length > 0 ? (
                     <div className="pods-table-container">
                         <table className="pods-table">
                             <thead>
@@ -105,7 +105,7 @@ const PodDetailsPage: React.FC = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {cluster.podDetatils.map((pod, index) => (
+                                {cluster.podDetails.map((pod, index) => (
                                     <tr key={index}>
                                         <td className="pod-name">{pod.podName}</td>
                                         <td>
@@ -113,7 +113,7 @@ const PodDetailsPage: React.FC = () => {
                                                 {pod.podStatus}
                                             </span>
                                         </td>
-                                        <td className="pod-ip">{pod.podIP}</td>
+                                        <td className="pod-ip">{pod.ipAddress}</td>
                                     </tr>
                                 ))}
                             </tbody>

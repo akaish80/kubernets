@@ -17,24 +17,19 @@
                 "podName": "web-frontend-1",
                 "podStatus": "Running",
                 "podIP": "192.168.1.10"
-           
-                },
+            },
             {
                 "podName": "web-frontend-2",
                 "podStatus": "Running",
                 "podIP": "192.168.1.11"
-           
-                },
+            },
             {
                 "podName": "api-backend-1",
                 "podStatus": "Running",
                 "podIP": "192.168.1.20"
-           
-                }
-       
-            ]
-   
-        },
+            }
+        ]
+    },
     {
         "id": "2",
         "name": "cluster2",
@@ -52,18 +47,14 @@
                 "podName": "test-app-1",
                 "podStatus": "Running",
                 "podIP": "192.168.2.10"
-           
-                },
+            },
             {
                 "podName": "test-app-2",
                 "podStatus": "Pending",
                 "podIP": "192.168.2.11"
-           
-                }
-       
-            ]
-   
-        },
+            }
+        ]
+    },
     {
         "id": "3",
         "name": "cluster3",
@@ -77,8 +68,7 @@
         "Nodes": "3",
         "Pods": "0",
         "podDetatils": []
-   
-        },
+    },
     {
         "id": "4",
         "name": "cluster4",
@@ -96,30 +86,24 @@
                 "podName": "user-service-1",
                 "podStatus": "Running",
                 "podIP": "192.168.4.10"
-           
-                },
+            },
             {
                 "podName": "user-service-2",
                 "podStatus": "Running",
                 "podIP": "192.168.4.11"
-           
-                },
+            },
             {
                 "podName": "payment-service-1",
                 "podStatus": "Running",
                 "podIP": "192.168.4.20"
-           
-                },
+            },
             {
                 "podName": "notification-service-1",
                 "podStatus": "Running",
                 "podIP": "192.168.4.30"
-           
-                }
-       
-            ]
-   
-        }
+            }
+        ]
+    }
   
     ] 
 }
