@@ -15,6 +15,7 @@ const PodDetails: React.FC<PodDetailsProps> = ({ pods, clusterName, onClose }) =
                     <h3>📦 Pod Details for {clusterName}</h3>
                     <button className="close-button" onClick={onClose}>×</button>
                 </div>
+                <div></div>
                 <div className="pod-details-content">
                     {pods.length > 0 ? (
                         <div className="pod-table-wrapper">

@@ -48,9 +48,7 @@ const ClusterTable: React.FC<ClusterTableProps> = ({ clusters }) => {
                         <tr>
                             <th>Status</th>
                             <th>Name</th>
-                            <th>Ready</th>
                             <th>Health</th>
-                            <th>Nodes</th>
                             <th>Pods</th>
                             <th>Created At</th>
                             <th>Updated At</th>
@@ -75,23 +73,13 @@ const ClusterTable: React.FC<ClusterTableProps> = ({ clusters }) => {
                                     </button>
                                 </td>
                                 <td>
-                                    <span className={`metric-badge ${cluster.ready === cluster.nodes ? 'healthy' : 'warning'}`}>
-                                        {cluster.ready}/{cluster.nodes}
-                                    </span>
-                                </td>
-                                <td>
                                     <span className={`metric-badge ${getHealthStatus(cluster.health)}`}>
                                         {cluster.health}%
                                     </span>
                                 </td>
                                 <td>
                                     <span className="metric-badge">
-                                        {cluster.nodes}
-                                    </span>
-                                </td>
-                                <td>
-                                    <span className="metric-badge">
-                                        {cluster.pods}
+                                        {cluster?.podDetails?.length}
                                     </span>
                                 </td>
                                 <td className="date-cell">{formatDate(cluster.created_at)}</td>

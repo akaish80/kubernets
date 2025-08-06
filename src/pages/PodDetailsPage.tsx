@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { ClusterData } from '../types';
 
@@ -6,7 +6,13 @@ const PodDetailsPage: React.FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const cluster = location.state?.cluster as ClusterData;
+    const data = location.state?.cluster as ClusterData;
+
+    const [cluster, setServiceDetails] = useState<ClusterData[]>([]);
+
+    useEffect(() => {
+        setServiceDetails(data);
+    }, []);
 
     if (!cluster) {
         return (
@@ -37,6 +43,35 @@ const PodDetailsPage: React.FC = () => {
         return 'danger';
     };
 
+    const greatestPort = cluster?.podDetails?.length > 1 ? Math.max(...cluster?.podDetails?.map(pod => pod.port)) : cluster?.podDetails?.[0]?.port || 9091;
+
+    const handleIncrementOrDecrement = (path, port) => {
+        
+        const fetchServiceDetails = async () => {
+        try {
+            console.log('Fetching service details...');
+            
+            const body = JSON.stringify({ clusterId: cluster.id, podPort: port });
+            const res = await fetch(`http://127.0.0.1:8080/orchestrate/pod/${path}`, 
+                {method: "POST", body, headers: { "Content-Type": "application/json" }}); // Replace with your API
+            if (!res.ok) {
+            throw new Error('Failed to fetch users');
+            }
+            const data: ClusterData[] = await res.json();
+            setServiceDetails(data);
+        } catch (err) {
+            console.error('Error fetching service details:', err);
+            //setError((err as Error).message);
+        }
+        };
+
+        fetchServiceDetails();
+    };
+
+    const handleDecrement = () => {
+        console.log('Decrement button clicked');
+    };
+
     return (
         <div className="pod-details-page">
             <div className="page-header">
@@ -52,13 +87,9 @@ const PodDetailsPage: React.FC = () => {
                     <div className="info-grid">
                         <div className="info-item status">
                             <label>Status</label>
-                            <span className={`status ${cluster.status.toLowerCase()}`}>
+                            <span className={`status ${cluster?.status?.toLowerCase()}`}>
                                 {cluster.status}
                             </span>
-                        </div>
-                        <div className="info-item">
-                            <label>Ready Nodes</label>
-                            <span>{cluster.ready}/{cluster.nodes}</span>
                         </div>
                         <div className="info-item">
                             <label>Health Score</label>
@@ -67,12 +98,8 @@ const PodDetailsPage: React.FC = () => {
                             </span>
                         </div>
                         <div className="info-item">
-                            <label>Total Nodes</label>
-                            <span>{cluster.nodes}</span>
-                        </div>
-                        <div className="info-item">
                             <label>Total Pods</label>
-                            <span>{cluster.pods}</span>
+                            <span>{cluster?.podDetails?.length}</span>
                         </div>
                         <div className="info-item">
                             <label>Created</label>
@@ -93,6 +120,7 @@ const PodDetailsPage: React.FC = () => {
             <div className="pods-section">
                 <div className="pods-section-header">
                     <h3>Pod Details ({cluster?.podDetails?.length || 0} pods)</h3>
+                    <button onClick={() => handleIncrementOrDecrement('increment', greatestPort + 1)} className="increment-button">+</button>
                 </div>
                 {cluster?.podDetails && cluster?.podDetails.length > 0 ? (
                     <div className="pods-table-container">
@@ -102,6 +130,7 @@ const PodDetailsPage: React.FC = () => {
                                     <th>Pod Name</th>
                                     <th>Status</th>
                                     <th>IP Address</th>
+                                    <th>Terminate</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -114,6 +143,7 @@ const PodDetailsPage: React.FC = () => {
                                             </span>
                                         </td>
                                         <td className="pod-ip">{pod.ipAddress}</td>
+                                        <td><button onClick={() => handleIncrementOrDecrement('decrement', pod?.port)} className="increment-button">-</button></td>
                                     </tr>
                                 ))}
                             </tbody>

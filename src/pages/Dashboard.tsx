@@ -10,28 +10,28 @@ const Dashboard: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-    const fetchServiceDetails = async () => {
-      try {
-        console.log('Fetching service details...');
-        const res = await fetch('http://127.0.0.1:8080/orchestrate/details'); // Replace with your API
-        if (!res.ok) {
-          throw new Error('Failed to fetch users');
+        const fetchServiceDetails = async () => {
+        try {
+            console.log('Fetching service details...');
+            const res = await fetch('http://127.0.0.1:8080/orchestrate/details'); // Replace with your API
+            if (!res.ok) {
+            throw new Error('Failed to fetch users');
+            }
+            const data: InputData[] = await res.json();
+            setServiceDetails(data);
+        } catch (err) {
+            console.error('Error fetching service details:', err);
+            setError((err as Error).message);
         }
-        const data: InputData[] = await res.json();
-        setServiceDetails(data);
-      } catch (err) {
-        console.error('Error fetching service details:', err);
-        setError((err as Error).message);
-      }
-    };
+        };
 
-    fetchServiceDetails();
-  }, []);
+        fetchServiceDetails();
+    }, []);
 
     // Calculate statistics
     const totalClusters = serviceDetails.length;
     const activeClusters = serviceDetails.filter(cluster => cluster?.status === "ACTIVE").length;
-    const totalPods = serviceDetails.reduce((sum, cluster) => sum + cluster?.pods, 0);
+    const totalPods = serviceDetails.reduce((sum, cluster) => sum + cluster?.podDetails?.length, 0);
     const totalNodes = serviceDetails.reduce((sum, cluster) => sum + cluster?.nodes, 0);
 
     return (
@@ -53,10 +53,6 @@ const Dashboard: React.FC = () => {
                 <div className="stat-card">
                     <h4>Total Pods</h4>
                     <div className="value">{totalPods}</div>
-                </div>
-                <div className="stat-card">
-                    <h4>Total Nodes</h4>
-                    <div className="value">{totalNodes}</div>
                 </div>
             </div>
 
